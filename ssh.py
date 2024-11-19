@@ -1,9 +1,13 @@
 from tracemalloc import start
 import paramiko
+import os
 
 ip = "169.254.108.215"
 username = "admin"
-password = "Solutionz1!"
+password = os.getenv('NVX_PASSWORD')
+
+if not password:
+    raise ValueError("Environment variable NVX_PASSWORD is not set!")
 
 class ShellHandler:
     '''

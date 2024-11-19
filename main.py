@@ -5,6 +5,7 @@ import paramiko
 import time
 import threading
 import logging
+import os
 
 def setupDevice(ip):
     print("Connecting to " + ip)
@@ -36,7 +37,10 @@ def setupDevice(ip):
 ips = discover.autodiscovery()
 
 username = "admin"
-password = "Solutionz1!"
+password = os.getenv('NVX_PASSWORD')
+
+if not password:
+    raise ValueError("Environment variable NVX_PASSWORD is not set!")
 
 def cat(x):
     if len(x) == 0:
